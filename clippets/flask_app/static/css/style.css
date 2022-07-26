@@ -1,0 +1,25 @@
+.clipGrid{
+    display:grid;
+    grid-template-columns:  33% 33% 33%;
+    grid-auto-flow:row dense;
+    
+}
+
+.clipCard{
+    
+    
+    min-width: 400px;
+    min-height:250px;
+    margin-left: 15px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: moccasin;
+}
+.clipElements{
+    
+    flex:1;
+    border: 2px dashed white;
+    margin-top: 5px;
+    background-color: red;
+}

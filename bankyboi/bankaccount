@@ -1,0 +1,139 @@
+
+class BankAccount:
+    # don't forget to add some default values for these parameters!'
+    all_accounts=[]
+    accounts=0
+
+    def __init__(self, int_rate, balance): 
+        self.int_rate = int_rate
+        self.balance = balance
+        self.id= BankAccount.accounts
+        
+        
+        BankAccount.all_accounts.append(self)
+    
+    def deposit(self, amount):
+        self.balance += amount
+        return self
+    def withdraw(self, amount):
+        if amount <= self.balance:
+            self.balance -= amount
+        else:
+            amount = 0
+            print("Insufficient funds")
+        return amount
+    def display_account_info(self):
+        print(f"Balance: {self.balance} Interest Rate: {self.int_rate} Id {self.id}")
+        return self
+    def yield_interest(self):
+        self.balance += self.balance*self.int_rate
+        print(f"The account added {self.balance*self.int_rate} due to interest yield.")
+        return self
+    def update_accountId(self):
+        self.id =BankAccount.accounts    
+    def transfer(self,amount,receiver):
+        self.withdraw(amount)
+        receiver.deposit()
+
+    
+    @classmethod
+    def display_info_all_accounts(cls):
+        for account in cls.all_accounts:
+            account.display_account_info()
+    
+
+
+class User:
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+        self.accounts = []
+        self.accountNumber = 0
+    def add_account(self):
+        self.accounts.append({'id':BankAccount.accounts , 'account':BankAccount(int_rate=0.02, balance=0)})
+        BankAccount.accounts+=1
+    def make_deposit(self, amount):
+        self.display_accounts()
+        id = input("Type the ID you want to deposit to")
+        self.accounts[int(id)]['account'].deposit(amount)
+        return self
+    def make_withdrawal(self, amount):
+        self.display_accounts()
+        id = input("Type the ID you want to withdraw from")
+       
+        self.accounts[int(id)]['account'].withdraw(amount)
+    def make_transfer(self, amount, receiver):
+        self.display_accounts()
+        id = input("Type the ID you want to withdraw from")
+        withdrawl_amount=self.accounts[int(id)]['account'].withdraw(amount)
+        receiver.display_accounts()
+        id = input("Type the ID you want to deposit to")
+        receiver.accounts[int(id)]['account'].deposit(withdrawl_amount)
+        return self
+
+       
+        return self
+    def display_user_balance(self):
+        print(f"Balance: {self.account.balance}")
+    def display_accounts(self):
+        for i in range(len(self.accounts)):
+            print(f"Account Details for {self.name}:" )
+            print( f"Account ID: {i} \nBalance:{self.accounts[i]['account'].balance}")
+
+   
+        
+
+
+
+shawn = User("Shawn","shawniscool10@fakemail.com")
+
+janice = User("Janice","jay.nice@fakemail.com")
+
+shawn.add_account()
+
+janice.add_account()
+
+janice.add_account()
+
+shawn.add_account()
+
+shawn.add_account()
+
+
+
+BankAccount.display_info_all_accounts()
+
+
+
+
+
+shawn.make_deposit(100)
+
+shawn.display_accounts()
+
+janice.display_accounts()
+
+janice.make_deposit(100)
+
+janice.display_accounts()
+
+shawn.make_transfer(50,janice)
+
+shawn.display_accounts()
+
+janice.display_accounts()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

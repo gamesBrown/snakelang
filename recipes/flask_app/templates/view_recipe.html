@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link"href="/dashboard"><u>Home</u></a>
+              <a class="nav-link" href="/dashboard"><u>Back To Recipes</u></a>
+              <form action = "/logout"  method ="post">
+                <button type="submit" class="btn btn-primary">Logout</button>
+               </form>
+               <h4 class="ml-3 mr-3">
+                Logged in as {{user.first_name}}{{user.last_name}}
+               </h4>
+
+
+            </div>
+          </div>
+        </div>
+      </nav>
+    You are viewing Recipe {{id}}
+    User can view a recipe after getting to this page, in nav back to recipes is displayed
+    <div>{{recipe.name}}</div>
+
+    <div class="card mx-auto w-50">
+        <div class="card-body">
+          <h5 class="card-title">{{recipe.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{recipe.description}}</h6>
+          <p class="card-text">{{recipe.instructions}}</p>
+          {% if recipe.under30 ==1 %}
+          <h6><i>Quick Recipe</i></h6>
+          {% endif %}  
+          <h6>Created on <bold>{{recipe.created_date}}</bold></h6>
+          <h6>Made by <bold>{{recipe.poster.first_name}}{{recipe.poster.last_name}}</bold></h6>
+          <a href="/create_recipe"><button>Create New?</button></a>
+            
+        </div>
+      </div>
+
+    Recipe view has name of recipe, who posted it
+    description,
+    under 30 minutes
+    instructions
+    and the date it was made
+   
+    
+</body>
+</html>

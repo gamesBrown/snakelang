@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<style>
+    .{{boxColor}}{
+        background-color: {{boxColor}};
+        
+    }
+    .{{boxColor2}}{
+        background-color: {{boxColor2}};
+        
+    }
+    .gridContainer{
+    height: 800px;
+    width: 800px;
+    display: grid;
+    grid-template-columns:{%for col in range(column_count)%}
+                            auto
+                            {%endfor%};
+    gap: 2px 2px;
+    background-color: purple;
+    
+}
+</style>
+<body>
+    <div class="gridContainer">
+    {% for col in range(column_count)%}
+        {%for row in range(row_count)%}
+        {% if col % 2 ==0 %}
+            {% if row % 2 ==0 %}
+            
+            <div class="{{boxColor}} box grid">{{col}},{{row}}</div>
+
+            {% else %}
+            <div class="{{boxColor2}} box grid">{{col}},{{row}}</div>
+            {%endif%}
+        {% else %} 
+        {% if row % 2 ==0 %}
+            
+            <div class="{{boxColor2}} box grid">{{col}},{{row}}</div>
+
+            {% else %}
+            <div class="{{boxColor}} box grid">{{col}},{{row}}</div>
+            {%endif%}
+            
+        {% endif %}
+    {%endfor%}
+    {%endfor%}
+</div>
+    
+    
+</body>
+</html>
