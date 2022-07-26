@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playgrounds</title>
+</head>
+<style>
+    *{outline: 2px solid red;
+        
+    }
+    .box{
+        width: 250px;
+        height: 250px;
+    
+        background-color: {{back_color}}
+    }
+    .boxContainer{
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        height:50%;
+        width:100%;
+    }
+    .centerText{
+
+        text-align: center;
+    }
+</style>
+<body>
+    <h1 class="centerText">Jello World</h1>
+    <div class="boxContainer">
+    {% for box in range(box_count) %}
+    <div class="box"></div>
+    
+    {% endfor %}
+    
+
+</div>
+    
+
+    
+    
+</body>
+</html>

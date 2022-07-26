@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href='https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css'>
+</head>
+<style>
+    .box{
+        width: 50px;
+        height: 50px;
+        background-color: aqua;
+        
+    }
+    .container{
+      
+
+        display:inline-block;
+        width:500px;
+        height:500px;
+        
+        margin: auto;
+        background-color:moccasin;
+
+    }
+</style> 
+<body>
+    hiya fellas
+    {%for hero in heroes%}
+        <h2>{{hero.alter_ego}}</h2>
+    {% endfor %}
+    <h3><a href="add_hero.html">Create</a> a hero of your own...</h3>
+</body>
+</html>

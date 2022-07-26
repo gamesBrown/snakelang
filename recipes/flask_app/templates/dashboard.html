@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+   
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link"href="/dashboard"><u>Home</u></a>
+              <a class="nav-link" href="/create_recipe"><u>Create New Recipe</u></a>
+              <form action = "/logout"  method ="post">
+                <button type="submit" class="btn btn-primary">Logout</button>
+               </form>
+               <h4 class="ml-3 mr-3">
+                Logged in as {{user.first_name}}{{user.last_name}}
+               </h4>
+
+
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {% with messages = get_flashed_messages() %} 
+      {%if messages%}
+      {%for message in messages%}
+      {{message}}
+      {% endfor %}
+      {% endif %} 
+      {% endwith %}
+
+    <table class="table w-75 mx-auto">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Recipe</th>
+            <th scope="col">Quick Recipe</th>
+            <th scope="col">Creator</th>
+            <th scope="col">Upload Date</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            {%for recipe in recipe_list%}
+            
+        
+          <tr>
+            <th scope="row">{{count}}</th>
+            <td>{{recipe.name}}</td>
+            <td>{% if recipe.under30 ==1%}
+                Yes
+                {% else %}
+                No
+                {% endif %}
+            </td>
+          
+            <td>{{recipe.poster.first_name}}{{recipe.poster.last_name}}{% if user.id == recipe.user_id %} (you) {% endif %}</td>
+            <td>
+                {{recipe.created_date}}
+            </td>
+            {% if user.id == recipe.user_id %}
+            
+            <td><a href="/view_recipe/{{recipe.id}}">View</a>, <a href="/edit_recipe/{{recipe.id}}">Edit</a>, <a href="/delete_recipe/{{recipe.id}}">Delete</a></td>
+            {% else %}
+            <td><a href="/view_recipe/{{recipe.id}}">View</a></td>
+            {% endif %}
+          </tr>
+   
+    {% endfor %}
+</tbody>
+</table>
+
+    SUCCESS
+    Dashboard: 
+    User sees all recipes
+    in nav, logout and create is displayed
+    The recipe is displayed with the name, whether itis under 30 minutes, and additionaly if you are the user that made the recipe, you can also delete and edit the recipe
+
+   
+    
+</body>
+</html>
